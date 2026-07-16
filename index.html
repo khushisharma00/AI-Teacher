@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Teacher</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- AI Teacher Avatar -->
+
+    <div class="avatar-container">
+
+        <div class="teacher-avatar" id="teacherAvatar">
+            👩‍🏫
+        </div>
+
+        <h1>AI Teacher</h1>
+
+        <p>Your Personal AI Tutor</p>
+
+    </div>
+
+
+    <!-- Teach Form -->
+
+    <div class="card">
+
+        <h2>📚 Learn Any Topic</h2>
+
+        <form action="/teach" method="POST">
+
+            <input
+                type="text"
+                name="topic"
+                placeholder="Enter any topic..."
+                required>
+
+            <button type="submit">
+
+                🚀 Teach Me
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- Lesson -->
+
+    {% if lesson %}
+
+    <div class="lesson-box">
+
+        <h2>📘 Lesson</h2>
+
+        <div id="lesson">
+
+            {{ lesson|safe }}
+
+        </div>
+
+        <br>
+
+        <button
+            type="button"
+            onclick="speakLesson()">
+
+            🔊 Speak Lesson
+
+        </button>
+
+        <button
+            type="button"
+            onclick="speechSynthesis.cancel()">
+
+            ⏹ Stop Voice
+
+        </button>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- Doubt -->
+
+    {% if lesson %}
+
+    <div class="card">
+
+        <h2>❓ Ask Your Doubt</h2>
+
+        <form action="/doubt" method="POST">
+
+            <input
+                type="text"
+                name="doubt"
+                placeholder="Type your doubt..."
+                required>
+
+            <button type="submit">
+
+                Ask Doubt
+
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- Doubt Answer -->
+
+    {% if doubt_answer %}
+
+    <div class="lesson-box">
+
+        <h2>💡 AI Teacher Answer</h2>
+
+        <div id="answer">
+
+            {{ doubt_answer|safe }}
+
+        </div>
+
+        <br>
+
+        <button
+            type="button"
+            onclick="speakLesson()">
+
+            🔊 Speak Again
+
+        </button>
+
+        <button
+            type="button"
+            onclick="speechSynthesis.cancel()">
+
+            ⏹ Stop
+
+        </button>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <hr>
+
+    <footer>
+
+        <p>
+
+            ❤️ Made by <b>Khushi Sharma</b>
+
+        </p>
+
+        <p>
+
+            AI Teacher using Flask + Google Gemini
+
+        </p>
+
+    </footer>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
